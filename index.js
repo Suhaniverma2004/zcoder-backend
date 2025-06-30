@@ -7,9 +7,10 @@ const app = express();
 const corsOptions = {
   origin: [
     'http://localhost:3000', // For your local development
-    'https://zcoder-frontend-theta.vercel.app/' // A placeholder for your Vercel URL
+   'https://zcoder-frontend-theta.vercel.app' // A placeholder for your Vercel URL
   ]
 };
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Using the JDoodle API
@@ -26,16 +27,6 @@ app.post('/api/execute', async (req, res) => {
   if (!config) {
     return res.status(400).json({ error: 'Unsupported language.' });
   }
-
-  const io = new Server(server, {
-  cors: {
-    origin: [
-      'http://localhost:3000',
-      'https://zcoder-frontend-theta.vercel.app/' // The same placeholder
-    ],
-    methods: ["GET", "POST"]
-  }
-});
 
   const payload = {
     clientId: process.env.JDOODLE_CLIENT_ID,
