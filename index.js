@@ -31,7 +31,7 @@ app.post('/api/execute', async (req, res) => {
   cors: {
     origin: [
       'http://localhost:3000',
-      'https://your-live-frontend-url.vercel.app' // The same placeholder
+      'https://zcoder-frontend-lby6v9ih1-zcoders.vercel.app' // The same placeholder
     ],
     methods: ["GET", "POST"]
   }
