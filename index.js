@@ -4,7 +4,12 @@ const axios = require('axios');
 require('dotenv').config(); // This will look for a .env file in the 'backend' folder
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: [
+    'http://localhost:3000', // For your local development
+    'https://your-live-frontend-url.vercel.app' // A placeholder for your Vercel URL
+  ]
+};
 app.use(express.json());
 
 // Using the JDoodle API
@@ -21,6 +26,16 @@ app.post('/api/execute', async (req, res) => {
   if (!config) {
     return res.status(400).json({ error: 'Unsupported language.' });
   }
+
+  const io = new Server(server, {
+  cors: {
+    origin: [
+      'http://localhost:3000',
+      'https://your-live-frontend-url.vercel.app' // The same placeholder
+    ],
+    methods: ["GET", "POST"]
+  }
+});
 
   const payload = {
     clientId: process.env.JDOODLE_CLIENT_ID,
