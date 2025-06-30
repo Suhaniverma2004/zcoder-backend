@@ -6,8 +6,8 @@ require('dotenv').config(); // This will look for a .env file in the 'backend' f
 const app = express();
 const corsOptions = {
   origin: [
-    'http://localhost:3000', // For your local development
-   'https://zcoder-frontend-theta.vercel.app' // A placeholder for your Vercel URL
+    'http://localhost:3000',
+    'https://zcoder-frontend-theta.vercel.app' // <-- REMOVED TRAILING SLASH
   ]
 };
 app.use(cors(corsOptions));
@@ -47,7 +47,7 @@ app.post('/api/execute', async (req, res) => {
 
 // --- THIS IS THE FIX ---
 // This server is now correctly assigned to port 5000.
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Code Execution Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
