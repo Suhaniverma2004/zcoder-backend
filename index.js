@@ -7,7 +7,7 @@ const app = express();
 const corsOptions = {
   origin: [
     'http://localhost:3000', // For your local development
-    'https://zcoder-frontend-lby6v9ih1-zcoders.vercel.app' // A placeholder for your Vercel URL
+    'https://zcoder-frontend-theta.vercel.app/' // A placeholder for your Vercel URL
   ]
 };
 app.use(express.json());
@@ -31,7 +31,7 @@ app.post('/api/execute', async (req, res) => {
   cors: {
     origin: [
       'http://localhost:3000',
-      'https://zcoder-frontend-lby6v9ih1-zcoders.vercel.app' // The same placeholder
+      'https://zcoder-frontend-theta.vercel.app/' // The same placeholder
     ],
     methods: ["GET", "POST"]
   }
