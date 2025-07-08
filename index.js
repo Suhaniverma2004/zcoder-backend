@@ -1,25 +1,27 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-require('dotenv').config(); // This will look for a .env file in the 'backend' folder
+require('dotenv').config();
 
 const app = express();
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'https://zcoder-frontend-theta.vercel.app' // <-- REMOVED TRAILING SLASH
-  ]
+    'https://zcoder-frontend-theta.vercel.app'
+  ],
+  credentials: true // ✅ Add this if using cookies/auth
 };
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Using the JDoodle API
+// Language mapping config
 const languageConfig = {
   javascript: { lang: 'nodejs', versionIndex: '4' },
   python: { lang: 'python3', versionIndex: '4' },
   cpp: { lang: 'cpp17', versionIndex: '1' },
 };
 
+// Execute code endpoint
 app.post('/api/execute', async (req, res) => {
   const { language, code } = req.body;
   const config = languageConfig[language];
@@ -45,9 +47,13 @@ app.post('/api/execute', async (req, res) => {
   }
 });
 
-// --- THIS IS THE FIX ---
-// This server is now correctly assigned to port 5000.
+// ✅ Add a root route for server health check
+app.get('/', (req, res) => {
+  res.send('ZCoder Code Runner API is Live ⚙️');
+});
+
+// ✅ Listen on correct port for Render
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Code Runner server running on port ${PORT}`);
 });
