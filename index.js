@@ -17,7 +17,6 @@ app.use(express.json());
 const evaluator = require('./routes/evaluator');
 app.use('/api', evaluator);
 
-
 // Language mapping config
 const languageConfig = {
   javascript: { lang: 'nodejs', versionIndex: '4' },
